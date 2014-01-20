@@ -48,7 +48,7 @@
                     <div class="nav-collapse collapse">
                         <%if (user != null) {%>
                         <jsp:include page="jsp/menuSuperior.jsp" />   
-                        <% } %>
+                        <% }%>
                         <jsp:include page="jsp/usuario/infologin.jsp" />                        
                     </div>
                 </div>
@@ -111,7 +111,7 @@
 
 
         <script>
-            
+
             $(document).ready(function() {
                 inicializacion();
                 $('#lnkLenguaje').unbind('click');
@@ -136,6 +136,18 @@
 
                     var entradaControl = control_entrada_list('<%=request.getContextPath()%>');
                     entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+                $('#lnkPregunta').unbind('click');
+                $('#lnkPregunta').click(function() {
+                    var pregunta = objeto('pregunta', '<%=request.getContextPath()%>');
+                    var preguntaView = vista(pregunta, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(preguntaView.getEmptyList());
+
+                    var preguntaControl = control_pregunta_list('<%=request.getContextPath()%>');
+                    preguntaControl.inicia(preguntaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
             });
