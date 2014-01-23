@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author rafa
+ * @author Alvaro
  */
 public class LenguajeGetprettycolumns implements GenericOperation {
 

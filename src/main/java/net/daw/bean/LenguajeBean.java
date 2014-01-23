@@ -10,8 +10,8 @@ package net.daw.bean;
  */
 public class LenguajeBean {
 
-    private Integer id;
-    private String nombre;
+    private Integer id = 0;
+    private String nombre = "";
 
     public LenguajeBean() {
 

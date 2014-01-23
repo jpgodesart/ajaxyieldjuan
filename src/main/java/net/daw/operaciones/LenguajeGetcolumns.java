@@ -16,7 +16,7 @@ import net.daw.helper.Conexion;
 
 /**
  *
- * @author rafa
+ * @author Alvaro
  */
 public class LenguajeGetcolumns implements GenericOperation {
 

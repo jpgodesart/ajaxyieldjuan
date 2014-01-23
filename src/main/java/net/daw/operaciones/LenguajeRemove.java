@@ -18,7 +18,7 @@ import net.daw.helper.Conexion;
 
 /**
  *
- * @author rafa
+ * @author Alvaro
  */
 public class LenguajeRemove implements GenericOperation {
     @Override

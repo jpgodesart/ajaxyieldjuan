@@ -16,7 +16,7 @@ import net.daw.helper.FilterBean;
 
 /**
  *
- * @author rafa
+ * @author Alvaro
  */
 public class LenguajeGetpages implements GenericOperation {
 
