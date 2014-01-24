@@ -12,9 +12,7 @@ package net.daw.operaciones;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import net.daw.bean.PreguntaBean;
 import net.daw.dao.PreguntaDao;
 import net.daw.helper.Conexion;
@@ -33,11 +31,7 @@ public class PreguntaGet implements GenericOperation {
                 PreguntaBean oPregunta = new PreguntaBean();
                 oPregunta.setId(Integer.parseInt(request.getParameter("id")));
                 oPreguntaDAO.get(oPregunta);
-                GsonBuilder gsonBuilder = new GsonBuilder();
-                gsonBuilder.setDateFormat("dd/MM/yyyy");
-                Gson gson = gsonBuilder.create();
-                data = gson.toJson(oPregunta);
-                
+                data = new Gson().toJson(oPregunta);
             }
             return data;
         } catch (Exception e) {
