@@ -50,50 +50,7 @@ var control_pregunta_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             //$(prefijo_div + '#nombre').focus();
         }
-        /****************************************************************************
-        
-         $(prefijo_div + '#id_cuestionario_desc').empty().html(objeto('cuestionario', path).getOne($(prefijo_div + '#id_cuestionario').val()).descripcion);
-
-        //en desarrollo: tratamiento de las claves ajenas ...
-        $(prefijo_div + '#id_cuestionario_button').unbind('click');
-        $(prefijo_div + '#id_cuestionario_button').click(function() {
-
-            var cuestionario = objeto('cuestionario', path);
-            var cuestionarioView = vista(cuestionario, path);
-
-            cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>" + "<h3 id="myModalLabel">Elección</h3>';
-            pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>';
-            listado = cuestionarioView.getEmptyList();
-            loadForm('#modal02', cabecera, listado, pie, true);
-
-            $(prefijo_div + '#modal02').css({
-                'right': '20px',
-                'left': '20px',
-                'width': 'auto',
-                'margin': '0',
-                'display': 'block'
-            });
-
-            var cuestionarioControl = control_cuestionario_list(path);
-            cuestionarioControl.inicia(cuestionarioView, 1, null, null, 10, null, null, null, callbackSearchCuestionario, null, null, null);
-
-            function callbackSearchCuestionario(id) {
-                $(prefijo_div + '#modal02').modal('hide');
-                $(prefijo_div + '#modal02').data('modal', null);
-                $(prefijo_div + '#id_cuestionario').val($(this).attr('id'));
-                $(prefijo_div + '#id_cuestionario_desc').empty().html(objeto('cuestionario', path).getOne($(prefijo_div + '#id_cuestionario').val()).descripcion);
-                return false;
-            }
-
-            return false;
-
-        });
-
-        
-        
-        
-        ****************************************************************************/
-        
+      
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
             enviarDatosUpdateForm(view, id);

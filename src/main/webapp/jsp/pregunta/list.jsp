@@ -89,7 +89,7 @@
         <div class="modal-body"></div>
         <div class="modal-footer"></div>
     </div>
-    <div id="modal02" class="modal container hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="modal02" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header"></div>
         <div class="modal-body"></div>
         <div class="modal-footer"></div>

@@ -109,6 +109,7 @@
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
         <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
+        <script src="js/control/pregunta.js" charset="UTF-8"></script>
 
 
         <script>
@@ -151,6 +152,19 @@
                     tipodocumentoControl.inicia(tipodocumentoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
+                $('#lnkPregunta').unbind('click');
+                $('#lnkPregunta').click(function() {
+                    var pregunta = objeto('pregunta', '<%=request.getContextPath()%>');
+                    var preguntaView = vista(pregunta, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(preguntaView.getEmptyList());
+
+                    var preguntaControl = control_pregunta_list('<%=request.getContextPath()%>');
+                    preguntaControl.inicia(preguntaView, 1, null, null, 10, null, null, null, null);
+                    return false;
+                });
+
             });
 
         </script>
