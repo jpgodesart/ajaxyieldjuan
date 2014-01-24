@@ -108,6 +108,13 @@ public class GenericDaoImplementation<TIPO_OBJETO> implements GenericDao<TIPO_OB
                                         case "java.lang.Integer":
                                             method.invoke(oBean, Integer.parseInt(strValor));
                                             break;
+                                        case "java.lang.Boolean":
+                                            if (Integer.parseInt(strValor) == 1) {
+                                                method.invoke(oBean, true);
+                                            } else {
+                                                method.invoke(oBean, false);
+                                            }
+                                            break;
                                         case "java.util.Date":
                                             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                                             method.invoke(oBean, format.parse(strValor));
@@ -150,12 +157,22 @@ public class GenericDaoImplementation<TIPO_OBJETO> implements GenericDao<TIPO_OB
                         if (!method.getName().equals("getClass")) {
                             final Class<?> strTipoDevueltoMetodoGet = method.getReturnType();
                             String value = (String) method.invoke(oBean).toString();
-                            if (strTipoDevueltoMetodoGet.getName().equals("java.util.Date")) {
-                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                                value = format.format(method.invoke(oBean));
-                            }                                 
-                            String strCampo=method.getName().substring(3).toLowerCase(Locale.ENGLISH);
+                            switch (strTipoDevueltoMetodoGet.getName()) {
+                                case "java.util.Date":
+                                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                                    value = format.format(method.invoke(oBean));
+                                    break;
+                                case "java.lang.Boolean":
+                                    if ("true".equals(value)) {
+                                        value = "1";
+                                    } else {
+                                        value = "0";
+                                    }
+                                    break;
+                            }
+                            String strCampo = method.getName().substring(3).toLowerCase(Locale.ENGLISH);
                             oMysql.updateOne((Integer) metodo_getId.invoke(oBean), strTabla, strCampo, value);
+
                         }
                     }
                 }

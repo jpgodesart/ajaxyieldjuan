@@ -184,7 +184,16 @@ var vista = function(objeto, ContextPath) {
                             tabla += add_tabla;
                         });
                     } else {
-                        tabla += '<td>' + value[valor] + '</td>';
+                        switch (value[valor]) {
+                            case true:
+                                tabla += '<td><i class="icon-ok"></i></td>';
+                                break;
+                            case false:
+                                tabla += '<td><i class="icon-remove"></i></td>';
+                                break;
+                            default:
+                                tabla += '<td>' + value[valor] + '</td>';
+                        }
                     }
                 });
                 tabla += '<td><div class="btn-toolbar"><div class="btn-group">';
@@ -203,7 +212,16 @@ var vista = function(objeto, ContextPath) {
             datos = objeto.getOne(id);
             var tabla = "<table class=\"table table table-bordered table-condensed\">";
             $.each(objeto.getFieldNames(), function(index, valor) {
-                tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td><td>' + datos[valor] + '</td></tr>';
+                switch (datos[valor]) {
+                    case true:
+                        tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td><td><i class="icon-ok"></i></td></tr>';
+                        break;
+                    case false:
+                        tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td><td><i class="icon-remove"></i></td></tr>';
+                        break;
+                    default:
+                        tabla += '<tr><td><strong>' + cabecera[index] + '</strong></td><td>' + datos[valor] + '</td></tr>';
+                }
             });
             tabla += '</table>';
             return tabla;
@@ -224,7 +242,17 @@ var vista = function(objeto, ContextPath) {
             campos = objeto.getFieldNames();
             datos = objeto.getOne(id);
             $.each(campos, function(index, valor) {
-                $('#' + campos[index]).val(datos[campos[index]]);
+                var a = true;
+                switch (datos[campos[index]]) {
+                    case true:
+                        $('#' + campos[index]).attr("checked", "checked");
+                        break;
+                    case false:
+                        break;
+                    default:
+                        $('#' + campos[index]).val(datos[campos[index]]);
+                }
+
             });
         },
         getRegistersInfo: function(filter, filteroperator, filtervalue, systemfilter, systemfilteroperator, systemfiltervalue) {

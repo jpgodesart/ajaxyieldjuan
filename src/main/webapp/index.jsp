@@ -108,7 +108,7 @@
 
         <script src="js/control/lenguaje.js" charset="UTF-8"></script>
         <script src="js/control/entrada.js" charset="UTF-8"></script>
-        <script src="js/control/pregunta.js" charset="UTF-8"></script>
+        <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
 
 
         <script>
@@ -139,16 +139,16 @@
                     entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
-                $('#lnkPregunta').unbind('click');
-                $('#lnkPregunta').click(function() {
-                    var pregunta = objeto('pregunta', '<%=request.getContextPath()%>');
-                    var preguntaView = vista(pregunta, '<%=request.getContextPath()%>');
+                $('#lnkTipodocumento').unbind('click');
+                $('#lnkTipodocumento').click(function() {
+                    var tipodocumento = objeto('tipodocumento', '<%=request.getContextPath()%>');
+                    var tipodocumentoView = vista(tipodocumento, '<%=request.getContextPath()%>');
 
                     $('#indexContenidoJsp').empty();
-                    $('#indexContenido').empty().append(preguntaView.getEmptyList());
+                    $('#indexContenido').empty().append(tipodocumentoView.getEmptyList());
 
-                    var preguntaControl = control_pregunta_list('<%=request.getContextPath()%>');
-                    preguntaControl.inicia(preguntaView, 1, null, null, 10, null, null, null, null);
+                    var tipodocumentoControl = control_tipodocumento_list('<%=request.getContextPath()%>');
+                    tipodocumentoControl.inicia(tipodocumentoView, 1, null, null, 10, null, null, null, null);
                     return false;
                 });
             });
