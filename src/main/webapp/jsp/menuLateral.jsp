@@ -18,6 +18,8 @@
         <li><a id="lnkTipodocumento" href="#">Tipodocumento</a></li>
         <li><a id="lnkActividad" href="#">Actividad</a></li>
         <li><a id="lnkEmpresa" href="#">Empresa</a></li>
+        <li><a id="lnkPregunta" href="#">Pregunta</a></li>
+        <li><a id="lnkCuestionario" href="#">Cuestionario</a></li>
 
     </ul>
 </div>

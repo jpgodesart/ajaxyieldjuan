@@ -113,7 +113,7 @@
         <script src="js/control/usuario.js" charset="UTF-8"></script>
         <script src="js/control/hilo.js" charset="UTF-8"></script>
         <script src="js/control/tipodocumento.js" charset="UTF-8"></script>
-
+        <script src="js/control/cuestionario.js" charset="UTF-8"></script>
         <script src="js/control/pregunta.js" charset="UTF-8"></script>
         <script src="js/control/actividad.js" charset="UTF-8"></script>
         <script src="js/control/empresa.js" charset="UTF-8"></script>
@@ -247,6 +247,19 @@
 
                     var empresaControl = control_empresa_list('<%=request.getContextPath()%>');
                     empresaControl.inicia(empresaView, 1, null, null, 10, null, null, null, null);
+
+                    return false;
+                });
+                $('#lnkCuestionario').unbind('click');
+                $('#lnkCuestionario').click(function() {
+                    var cuestionario = objeto('cuestionario', '<%=request.getContextPath()%>');
+                    var cuestionarioView = vista(cuestionario, '<%=request.getContextPath()%>');
+
+                    $('#indexContenidoJsp').empty();
+                    $('#indexContenido').empty().append(cuestionarioView.getEmptyList());
+
+                    var cuestionarioControl = control_cuestionario_list('<%=request.getContextPath()%>');
+                    cuestionarioControl.inicia(cuestionarioView, 1, null, null, 10, null, null, null, null);
 
                     return false;
                 });
