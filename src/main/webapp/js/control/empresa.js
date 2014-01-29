@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-var control_entrada_list = function(path) {
+var control_empresa_list = function(path) {
     //contexto privado
 
-    var prefijo_div = "#entrada_list ";
+    var prefijo_div = "#empresa_list ";
 
     function cargaBotoneraMantenimiento() {
         var botonera = [
@@ -86,16 +86,16 @@ var control_entrada_list = function(path) {
             return false;
         });
 
-        //clave ajena hilo
-        cargaClaveAjena('#id_hilo', '#id_hilo_desc', 'hilo')
-        $(prefijo_div + '#id_hilo_button').unbind('click');
-        $(prefijo_div + '#id_hilo_button').click(function() {
-            loadForeign('hilo', '#modal02', control_hilo_list, callbackSearchHilo);
+//        //clave ajena usuario
+        cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario')
+        $(prefijo_div + '#id_usuario_button').unbind('click');
+        $(prefijo_div + '#id_usuario_button').click(function() {
+            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchHilo);
             function callbackSearchHilo(id) {
                 $(prefijo_div + '#modal02').modal('hide');
                 $(prefijo_div + '#modal02').data('modal', null);
-                $(prefijo_div + '#id_hilo').val($(this).attr('id'));
-                cargaClaveAjena('#id_hilo', '#id_hilo_desc', 'hilo');
+                $(prefijo_div + '#id_usuario').val($(this).attr('id'));
+                cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario');
                 return false;
             }
             return false;

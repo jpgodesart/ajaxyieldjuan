@@ -10,9 +10,9 @@ package net.daw.bean;
  */
 public class UsuarioBean {
 
-    private Integer id;
-    private String login;
-    private String password;
+    private Integer id=0;
+    private String login="";
+    private String password="";
 
     public UsuarioBean() {
 

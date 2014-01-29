@@ -1,0 +1,4 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Tue Jan 28 12:39:27 CET 2014
+default-http\://repo.maven.apache.org/maven2/.lastUpdated=1390909167195
+http\://repo.maven.apache.org/maven2/.error=Could not transfer artifact org.apache.maven.plugins\:maven-dependency-plugin\:pom\:2.1 from/to central (http\://repo.maven.apache.org/maven2)\: repo.maven.apache.org\: Nombre o servicio desconocido

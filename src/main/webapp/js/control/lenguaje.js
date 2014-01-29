@@ -50,9 +50,36 @@ var control_lenguaje_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             //$(prefijo_div + '#nombre').focus();
         }
+        //http://jqueryvalidation.org/documentation/
+        $('#formulario').validate({
+            rules: {
+                nombre: {
+                    required: true,
+                    maxlength: 255
+                }
+            },
+            messages: {
+                nombre: {
+                    required: "Introduce un lenguaje",
+                    maxlength: "Tiene que ser menos de 255 caracteres"
+                }
+            },
+            highlight: function(element) {
+                $(element).closest('.control-group').removeClass('success').addClass('error');
+            },
+            success: function(element) {
+                element
+                        .text('OK!').addClass('valid')
+                        .closest('.control-group').removeClass('error').addClass('success');
+            }
+        });
+
+
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
-            enviarDatosUpdateForm(view,prefijo_div);
+            if ($('#formulario').valid()) {
+                enviarDatosUpdateForm(view, prefijo_div);
+            }
             return false;
         });
     }
@@ -173,7 +200,7 @@ var control_lenguaje_list = function(path) {
             });
 
             //asignación del evento de click para cambiar de página en la botonera de paginación
-            
+
             $(prefijo_div + '.pagination_link').unbind('click');
             $(prefijo_div + '.pagination_link').click(function() {
                 var id = $(this).attr('id');
@@ -183,7 +210,7 @@ var control_lenguaje_list = function(path) {
             });
 
             //boton de crear un nuevo elemento
-            
+
             if (callback) {
                 $(prefijo_div + '#crear').css("display", "none");
             } else {
@@ -195,12 +222,29 @@ var control_lenguaje_list = function(path) {
 
             //asignación del evento de filtrado al boton
 
+            $('#empresaForm').validate({
+                rules: {
+                    filtervalue: {
+                        required: true
+                    }
+                },
+                messages: {
+                    filtervalue: {
+                        required: "Introduce un valor"
+                    }
+                },
+                highlight: function(element) {
+                    $(element).closest('.control-group').removeClass('success').addClass('error');
+                }
+            });
             $(prefijo_div + '#btnFiltrar').unbind('click');
             $(prefijo_div + "#btnFiltrar").click(function() {
-                filter = $(prefijo_div + "#selectFilter option:selected").text();
-                filteroperator = $(prefijo_div + "#selectFilteroperator option:selected").text();
-                filtervalue = $(prefijo_div + "#inputFiltervalue").val();
-                thisObject.inicia(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
+                if ($('#empresaForm').valid()) {
+                    filter = $(prefijo_div + "#selectFilter option:selected").text();
+                    filteroperator = $(prefijo_div + "#selectFilteroperator option:selected").text();
+                    filtervalue = $(prefijo_div + "#inputFiltervalue").val();
+                    thisObject.inicia(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue);
+                }
                 return false;
             });
 

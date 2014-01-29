@@ -5,24 +5,33 @@
  */
 package net.daw.operaciones;
 
+import com.google.gson.Gson;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.daw.dao.HiloDao;
+import net.daw.helper.Conexion;
 
 
 /**
  *
- * @author rafa
+ * @author Alvaro
  */
-public class EntradaGetprettycolumns implements GenericOperation {
+public class HiloGetcolumns implements GenericOperation {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ArrayList<String> alColumns = null;
         try {
-            String data = "{\"data\": [\"id\", \"título\", \"contenido\", \"usuario\", \"hilo\", \"fecha\"]}";
+            HiloDao oHiloDAO = new HiloDao(Conexion.getConection());
+            alColumns = oHiloDAO.getColumnsNames();
+            String data = new Gson().toJson(alColumns);
+            data = "{\"data\":" + data + "}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("EntradaGetpagesJson: View Error: " + e.getMessage());
+            throw new ServletException("HiloGetcolumnsJson: View Error: " + e.getMessage());
         }
     }
+
 }

@@ -9,20 +9,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
- * @author rafa
+ * @author AntonioNP
  */
-public class EntradaGetprettycolumns implements GenericOperation {
+public class EmpresaGetprettycolumns implements GenericOperation {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
-            String data = "{\"data\": [\"id\", \"título\", \"contenido\", \"usuario\", \"hilo\", \"fecha\"]}";
+            String data = "{\"data\": [\"id\",\"N usuario\", \"N empresa\", \"cif\", \"direccion\", \"localidad\", \"provincia\", \"pais\", \"telefono\", \"fax\", \"actividad\", \"nombrecontacto\", \"emailcontacto\", \"validada\"]}";
             return data;
         } catch (Exception e) {
-            throw new ServletException("EntradaGetpagesJson: View Error: " + e.getMessage());
+            throw new ServletException("EmpresaGetpagesJson: View Error: " + e.getMessage());
         }
     }
 }

@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 
-var control_entrada_list = function(path) {
+var control_usuario_list = function(path) {
     //contexto privado
 
-    var prefijo_div = "#entrada_list ";
+    var prefijo_div = "#usuario_list ";
 
     function cargaBotoneraMantenimiento() {
         var botonera = [
+            {"class": "btn btn-mini action05", "icon": "", "text": "entradas"},
             {"class": "btn btn-mini action01", "icon": "icon-eye-open", "text": ""},
             {"class": "btn btn-mini action02", "icon": "icon-zoom-in", "text": ""},
             {"class": "btn btn-mini action03", "icon": "icon-pencil", "text": ""},
@@ -33,27 +34,7 @@ var control_entrada_list = function(path) {
             $(prefijo_div + place).empty();
         });
     }
-    function loadForeign(strObjetoForeign, strPlace, control, functionCallback) {
-        var objConsulta = objeto(strObjetoForeign, path);
-        var consultaView = vista(objConsulta, path);
 
-        cabecera = '<button id="full-width" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="myModalLabel">Elección</h3>';
-        pie = '<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cerrar</button>';
-        listado = consultaView.getEmptyList();
-        loadForm(strPlace, cabecera, listado, pie, true);
-
-        $(prefijo_div + strPlace).css({
-            'right': '20px',
-            'left': '20px',
-            'width': 'auto',
-            'margin': '0',
-            'display': 'block'
-        });
-
-        var consultaControl = control(path);
-        consultaControl.inicia(consultaView, 1, null, null, 10, null, null, null, functionCallback, null, null, null);
-
-    }
     function loadModalForm(view, place, id, action) {
         cabecera = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
         if (action == "edit") {
@@ -70,49 +51,13 @@ var control_entrada_list = function(path) {
             $(prefijo_div + '#id').val('0').attr("disabled", true);
             $(prefijo_div + '#nombre').focus();
         }
-        //clave ajena usuario
-        cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario')
-
-        $(prefijo_div + '#id_usuario_button').unbind('click');
-        $(prefijo_div + '#id_usuario_button').click(function() {
-            loadForeign('usuario', '#modal02', control_usuario_list, callbackSearchUsuario);
-            function callbackSearchUsuario(id) {
-                $(prefijo_div + '#modal02').modal('hide');
-                $(prefijo_div + '#modal02').data('modal', null);
-                $(prefijo_div + '#id_usuario').val($(this).attr('id'));
-                cargaClaveAjena('#id_usuario', '#id_usuario_desc', 'usuario');
-                return false;
-            }
-            return false;
-        });
-
-        //clave ajena hilo
-        cargaClaveAjena('#id_hilo', '#id_hilo_desc', 'hilo')
-        $(prefijo_div + '#id_hilo_button').unbind('click');
-        $(prefijo_div + '#id_hilo_button').click(function() {
-            loadForeign('hilo', '#modal02', control_hilo_list, callbackSearchHilo);
-            function callbackSearchHilo(id) {
-                $(prefijo_div + '#modal02').modal('hide');
-                $(prefijo_div + '#modal02').data('modal', null);
-                $(prefijo_div + '#id_hilo').val($(this).attr('id'));
-                cargaClaveAjena('#id_hilo', '#id_hilo_desc', 'hilo');
-                return false;
-            }
-            return false;
-        });
         $(prefijo_div + '#submitForm').unbind('click');
         $(prefijo_div + '#submitForm').click(function() {
             enviarDatosUpdateForm(view, prefijo_div);
             return false;
         });
     }
-    function cargaClaveAjena(lugarID, lugarDesc, objetoClaveAjena) {
-        if ($(prefijo_div + lugarID).val() !== "") {
-            objInfo = objeto(objetoClaveAjena, path).getOne($(prefijo_div + lugarID).val());
-            props = Object.getOwnPropertyNames(objInfo);
-            $(prefijo_div + lugarDesc).empty().html(objInfo[props[1]]);
-        }
-    }
+
     function removeConfirmationModalForm(view, place, id) {
         cabecera = "<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>" +
                 "<h3 id=\"myModalLabel\">Borrado de " + view.getObject().getName() + "</h3>";
@@ -136,6 +81,19 @@ var control_entrada_list = function(path) {
         loadForm(place, cabecera, view.getObjectTable(id), pie, true);
     }
 
+    function cargaEntradas(id) {
+
+        var entrada = objeto('entrada', path);
+        var entradaView = vista(entrada, path);
+
+        $('#indexContenidoJsp').empty();
+        $('#indexContenido').empty().append(entradaView.getEmptyList());
+
+        var entradaControl = control_entrada_list(path);
+        entradaControl.inicia(entradaView, 1, null, null, 10, null, null, null, null, "id_usuario", "equals", id);
+        return false;
+
+    }
     return {
         inicia: function(view, pag, order, ordervalue, rpp, filter, filteroperator, filtervalue, callback, systemfilter, systemfilteroperator, systemfiltervalue) {
 
@@ -194,6 +152,10 @@ var control_entrada_list = function(path) {
                 $(prefijo_div + '.btn.btn-mini.action04').unbind('click');
                 $(prefijo_div + '.btn.btn-mini.action04').click(function() {
                     removeConfirmationModalForm(view, '#modal01', $(this).attr('id'));
+                });
+                $(prefijo_div + '.btn.btn-mini.action05').unbind('click');
+                $(prefijo_div + '.btn.btn-mini.action05').click(function() {
+                    cargaEntradas($(this).attr('id'));
                 });
 
             }
